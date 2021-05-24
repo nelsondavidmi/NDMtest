@@ -9,7 +9,7 @@ import {isEmpty} from 'lodash';
 import styles from './styles';
 
 // @assets
-const arrowBack = require('../../../assets/svg/arrowBack');
+const arrowBack = require('../../assets/svg/arrowBack');
 
 const TopBar = ({
   title,
@@ -41,7 +41,7 @@ const TopBar = ({
           <SvgUri
             height={20}
             width={20}
-            fill={transparent ? '#FFFFFF' : color ? '#FFFFFF' : PRIMARY_COLOR}
+            fill="#FFFFFF"
             svgXmlData={arrowBack}
           />
         </TouchableOpacity>

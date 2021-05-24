@@ -1,4 +1,4 @@
-import { Platform, StyleSheet } from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 
 // @resolutions
 import {
@@ -10,7 +10,8 @@ import {
 import {
   PRIMARY_FONT,
   PRIMARY_COLOR,
-} from '../../../../../../app/styles/theme';
+  PRIMARY_FONT_MEDIUM,
+} from '../../theme/general';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -19,15 +20,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 30,
-    backgroundColor: 'white',
+    backgroundColor: PRIMARY_COLOR,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+
   },
   iconText: {
-    textAlign:'center',
-    fontSize:9,
+    textAlign: 'center',
+    fontSize: 9,
     fontFamily: PRIMARY_FONT,
   },
   alignRight: {
-    alignSelf:'center',
+    alignSelf: 'center',
     alignItems: 'center',
   },
   containerTransparent: {
@@ -43,14 +47,14 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   containerWithShadow: {
-    shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 1,
-},
-shadowOpacity: 0.22,
-shadowRadius: 2.22,
-elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 5,
   },
   containerRow: {
     flexDirection: 'row',
@@ -60,8 +64,9 @@ elevation: 5,
     marginLeft: 12,
     maxHeight: hp('7%'),
     maxWidth: wp('57%'),
-    fontFamily: PRIMARY_FONT,
-    fontSize: 16,
+    fontFamily: PRIMARY_FONT_MEDIUM,
+    color: '#FFFFFF',
+    fontSize: 18,
     alignSelf: 'center',
   },
   titleWhite: {
