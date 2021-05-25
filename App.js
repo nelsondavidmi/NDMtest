@@ -1,10 +1,11 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text, StyleSheet, Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Feather';
+import SplashScreen from 'react-native-splash-screen';
 
 // @Screens
 import LoadingScreen from './src/screens/LoadingScreen';
@@ -94,6 +95,9 @@ const Welcome = () => {
 const Stack = createStackNavigator();
 
 const App = () => {
+  useEffect(() => {
+    Platform.OS !== 'ios' ? SplashScreen.hide() : null;
+  }, []);
   return (
     <Provider store={store}>
       <NavigationContainer initialRouteName="Home">

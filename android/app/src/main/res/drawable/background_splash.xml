@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+    android:drawable="@drawable/gradient1"/>
+
+    <item
+        android:width="370dp"
+        android:height="210dp"
+        android:gravity="center"
+        android:bottom="50dp"
+        >
+        <bitmap
+            android:src="@drawable/ndmtitle"
+                    />
+
+                </item>
+
+</layer-list>
