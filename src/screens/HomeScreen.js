@@ -33,18 +33,18 @@ const HomeScreen = ({navigation}) => {
         JOIN TO THIS TEST. THIS TEST IS FOR NUBIERA
       </Text>
       <Text style={styles.subtitle}>DO YOU WANT TO BELONG TO THIS GROUP?</Text>
-      <View style={{marginTop: 50}}>
+      <View style={styles.marginButton}>
         <Button
           text="CREATE ACCOUNT"
           type={PRIMARY_BUTTON}
           customStyleContainer={styles.button}
-          onPress={()=> navigation.navigate('Signup')}
+          onPress={() => navigation.navigate('Signup')}
         />
         <Button
           text="LOGIN"
           type={SECONDARY_BUTTON}
           customStyleContainer={styles.button}
-          onPress={()=> navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Login')}
         />
       </View>
     </View>
@@ -89,6 +89,9 @@ const styles = StyleSheet.create({
   },
   button: {
     marginVertical: 5,
+  },
+  marginButton: {
+    marginTop: 80,
   },
 });
 export default HomeScreen;

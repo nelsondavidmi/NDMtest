@@ -5,7 +5,6 @@ import {
   TouchableWithoutFeedback,
   Image,
   TextInput,
-  Platform,
   Text,
 } from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
@@ -53,6 +52,7 @@ const Input = ({
 
   const warningStyle = {borderBottomColor: 'red', borderBottomWidth: 0.5};
   const warningStatus = validator && validator.value && warningStyle;
+  // eslint-disable-next-line no-shadow
   const onChangePrice = value => {
     if (value.length < 8) {
       onChangeText(value, property);
@@ -75,6 +75,7 @@ const Input = ({
           focus && warningStyle,
         ]}
         value={value}
+        // eslint-disable-next-line no-shadow
         onChangeText={value => onChangeText(value, property)}
         placeholder={placeholder}
         onFocus={onFocus}
@@ -116,6 +117,7 @@ const Input = ({
             {...commonPropsInput}
             style={[styles.inputArea, customStyle, warningStatus]}
             value={value}
+            // eslint-disable-next-line no-shadow
             onChangeText={value => onChangeText(value, property)}
             placeholder={placeholder}
             multiline={true}
@@ -143,6 +145,7 @@ const Input = ({
               {...commonPropsInput}
               style={[styles.inputPassword]}
               value={value}
+              // eslint-disable-next-line no-shadow
               onChangeText={value => onChangeText(value, property)}
               placeholder={placeholder}
               secureTextEntry={passwordMask}
@@ -193,6 +196,7 @@ const Input = ({
             type="money"
             options={formatDecimalOptions}
             value={value}
+            // eslint-disable-next-line no-shadow
             onChangeText={value => onChangePrice(value)}
             onFocus={onFocus}
             onEndEditing={onEndEditing}
@@ -214,6 +218,7 @@ const Input = ({
             placeholder={placeholder}
             value={value}
             keyboardType="numeric"
+            // eslint-disable-next-line no-shadow
             onChangeText={value => onChangePrice(value)}
             onFocus={onFocus}
             onEndEditing={onEndEditing}
@@ -242,6 +247,7 @@ const Input = ({
               ]}
               value={value}
               placeholder={placeholder}
+              // eslint-disable-next-line no-shadow
               onChangeText={value => onChangeText(value, property)}
               onFocus={onFocus}
               maxLength={maxLength}

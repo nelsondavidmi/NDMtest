@@ -30,7 +30,7 @@ const SignupScreen = ({navigation}) => {
   return (
     <>
       <SafeAreaView style={styles.topSafeArea} />
-      <StatusBar translucent barStyle="dark-content" />
+      <StatusBar translucent barStyle="light-content" />
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : null}
@@ -39,7 +39,9 @@ const SignupScreen = ({navigation}) => {
         <ScrollView keyboardShouldPersistTaps="handled">
           <View style={styles.mainContainer}>
             <View style={styles.textInfo}>
-              <Text style={styles.primaryText}>JOIN TO US AND CREATE NEW EXPERIENCES</Text>
+              <Text style={styles.primaryText}>
+                JOIN TO US AND CREATE NEW EXPERIENCES
+              </Text>
             </View>
             <View style={styles.sectionForm}>
               <SignupForm />

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     fontFamily: PRIMARY_FONT_LIGHT,
   },
   marginGeneral: {
-    marginTop: 20,
+    marginTop: 10,
   },
   textDescription: {
     fontFamily: PRIMARY_FONT_LIGHT,
@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
   inputArea: {
     paddingHorizontal: 15,
     marginTop: 20,
-    borderBottomColor: 'lightgray',
-    borderBottomWidth: 0.5,
+    borderRadius: 10,
+    borderColor: 'lightgray',
+    borderWidth: 0.5,
     textAlign: 'justify',
     fontFamily: PRIMARY_FONT,
   },
