@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   Text,
@@ -26,7 +26,27 @@ import SignupForm from '../components/signupForm';
 import TopBar from '../components/topbar';
 import Button from '../components/button';
 
-const SignupScreen = ({navigation}) => {
+const SignupScreen = ({navigation, fetchSignup}) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [image, setImage] = useState('');
+  const [passwordMask, setPasswordMask] = useState(true);
+  const [passwordMask2, setPasswordMask2] = useState(true);
+
+  const formData = {
+    first_name: firstName,
+    last_name: lastName,
+    email,
+    password,
+    confirmPassword,
+    phone,
+    image,
+  }
+
   return (
     <>
       <SafeAreaView style={styles.topSafeArea} />
@@ -44,13 +64,34 @@ const SignupScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.sectionForm}>
-              <SignupForm />
+              <SignupForm
+                {...{
+                  firstName,
+                  setFirstName,
+                  lastName,
+                  setLastName,
+                  email,
+                  setEmail,
+                  password,
+                  setPassword,
+                  confirmPassword,
+                  setConfirmPassword,
+                  phone,
+                  setPhone,
+                  image,
+                  setImage,
+                  passwordMask,
+                  passwordMask2,
+                  onTogglePasswordMask: () => setPasswordMask(!passwordMask),
+                  onTogglePasswordMask2: () => setPasswordMask2(!passwordMask2),
+                }}
+              />
             </View>
             <View style={styles.button}>
               <Button
                 text="CREATE ACCOUNT"
                 type={PRIMARY_BUTTON}
-                onPress={() => onSignup()}
+                onPress={() => fetchSignup(formData)}
                 isBottom
               />
             </View>

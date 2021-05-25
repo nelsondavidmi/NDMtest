@@ -7,42 +7,31 @@ import Input from '../input';
 import AlertMessage from '../alertMessage';
 
 const LoginForm = ({
-  emailIsValid,
-  error,
   email,
+  setEmail,
   password,
+  setPassword,
   passwordMask,
-  onChangeField,
-  onTogglePasswordMask,
+  setPasswordMask,
 }) => (
   <View>
     <Input
       value={email}
-      onChangeText={value => onChangeField(value, 'email')}
+      onChangeText={value => setEmail(value)}
       placeholder="Email"
       property="email"
       maxLength={60}
-      onEndEditing={() => onChangeField(email.trim(), 'email')}
+      onEndEditing={() => setEmail(email.trim(), 'email')}
     />
     <Input
       type="password"
       value={password}
-      onChangeText={value => onChangeField(value, 'password')}
+      onChangeText={value => setPassword(value)}
       placeholder="Password"
       property="password"
       passwordMask={passwordMask}
-      onTogglePasswordMask={onTogglePasswordMask}
+      onTogglePasswordMask={() => setPasswordMask(!passwordMask)}
       maxLength={30}
-    />
-    <AlertMessage
-      message={error}
-      type="error"
-      show={error && !email && !password}
-    />
-    <AlertMessage
-      message="This email is not valid"
-      type="info"
-      show={!emailIsValid && email}
     />
   </View>
 );

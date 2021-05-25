@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   Text,
@@ -27,6 +27,20 @@ import TopBar from '../components/topbar';
 import Button from '../components/button';
 
 const LoginScreen = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordMask, setPasswordMask] = useState(true);
+
+  const onLogin = () => {
+    const initialData = {
+      email,
+      password,
+    };
+    setEmail('');
+    setPassword('');
+    navigation.navigate('Welcome');
+  };
+
   return (
     <>
       <SafeAreaView style={styles.topSafeArea} />
@@ -39,13 +53,22 @@ const LoginScreen = ({navigation}) => {
         <ScrollView keyboardShouldPersistTaps="handled">
           <View style={styles.mainContainer}>
             <View style={styles.sectionForm}>
-              <LoginForm />
+              <LoginForm
+                {...{
+                  email,
+                  setEmail,
+                  password,
+                  setPassword,
+                  passwordMask,
+                  setPasswordMask,
+                }}
+              />
             </View>
             <View style={styles.button}>
               <Button
                 text="LOG IN"
                 type={PRIMARY_BUTTON}
-                onPress={() => navigation.navigate('Welcome')}
+                onPress={() => onLogin()}
                 isBottom
               />
             </View>
@@ -87,6 +110,7 @@ const styles = StyleSheet.create({
   },
   sectionForm: {
     marginHorizontal: 15,
+    marginTop: 20,
   },
   textInfo: {
     marginTop: 40,

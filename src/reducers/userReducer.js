@@ -7,17 +7,12 @@ import {
   GET_USER_REQUEST_FAILURE,
   GET_USER_REQUEST_SUCCESSFUL,
   GET_USER_REQUEST,
+  SIGNUP_REQUEST,
+  SIGNUP_REQUEST_SUCCESFUL,
+  SIGNUP_REQUEST_FAILURE,
 } from '../constants/actionTypes';
 
 const initialData = {
-  auth: {
-    isLoading: false,
-    successful: false,
-    error: false,
-  },
-  token: null,
-  userId: null,
-  refreshTokenValue: null,
   user: {
     data: null,
     isLoading: false,
@@ -28,78 +23,39 @@ const initialData = {
 
 const userReducer = (state = initialData, action) => {
   switch (action.type) {
-    case SET_TOKEN: {
+    case SIGNUP_REQUEST: {
       return {
         ...state,
-        token: action.payload.token,
-        userId: action.payload.userId,
-      };
-    }
-    case AUTH_REQUEST: {
-      return {
-        ...state,
-        auth: {
-          ...state.auth,
+        user: {
+          ...state.user,
+          data: null,
           isLoading: true,
-          error: false,
           successful: false,
+          error: false,
         },
       };
     }
-    case AUTH_REQUEST_FAILURE: {
+    case SIGNUP_REQUEST_SUCCESFUL: {
       return {
         ...state,
-        auth: {
-          ...state.auth,
-          error: true,
-          isLoading: false,
-          successful: false,
-        },
-      };
-    }
-    case AUTH_REQUEST_SUCCESSFUL: {
-      return {
-        ...state,
-        auth: {
-          ...state.auth,
-          error: false,
+        user: {
+          ...state.user,
+          data: action.payload.user,
           isLoading: false,
           successful: true,
-        },
-      };
-    }
-    case GET_USER_REQUEST: {
-      return {
-        ...state,
-        user: {
-          ...state.user,
           error: false,
-          isLoading: true,
-          successful: false,
         },
       };
     }
-    case GET_USER_REQUEST_SUCCESSFUL: {
+    case SIGNUP_REQUEST_FAILURE: {
       return {
         ...state,
         user: {
           ...state.user,
-          error: false,
-          isLoading: false,
-          successful: false,
-          data: action.payload,
-        },
-      };
-    }
-    case GET_USER_REQUEST_FAILURE: {
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          error: true,
-          isLoading: false,
-          successful: false,
           data: null,
+          isLoading: false,
+          successful: false,
+          error: action.payload.error,
         },
       };
     }
