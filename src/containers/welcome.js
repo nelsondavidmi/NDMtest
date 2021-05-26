@@ -6,7 +6,7 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 
 const mapStateToProps = ({userReducer}) => {
   return {
-    user: userReducer.user,
+    user: userReducer.user.data,
   };
 };
 

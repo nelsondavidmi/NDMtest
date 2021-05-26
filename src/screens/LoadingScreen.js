@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 // @assets
 const appLogo = require('../assets/ndmTitle.png');
@@ -14,12 +15,20 @@ const appLogo = require('../assets/ndmTitle.png');
 import {PRIMARY_COLOR} from '../theme/general';
 
 const LoadingScreen = ({navigation}) => {
+  const [id, setId] = useState('');
+  const getId = async () => {
+    const idValue = await AsyncStorage.getItem('id');
+    setId(idValue);
+    console.log(id, 'este es');
+  };
   const getSession = () => {
-    navigation.navigate('Home');
+    id ? navigation.navigate('Welcome') : navigation.navigate('Home');
   };
 
   useEffect(() => {
-    setTimeout(getSession, 3000);
+    getId();
+    setTimeout(getSession, 6000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

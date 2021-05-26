@@ -25,6 +25,10 @@ import {PRIMARY_BUTTON} from '../constants/constants';
 import SignupForm from '../components/signupForm';
 import TopBar from '../components/topbar';
 import Button from '../components/button';
+import LoaderAnimation from '../components/loaderAnimation';
+
+// @assets
+const loading = require('../assets/animations/loading.json');
 
 const SignupScreen = ({navigation, fetchSignup}) => {
   const [firstName, setFirstName] = useState('');
@@ -36,6 +40,7 @@ const SignupScreen = ({navigation, fetchSignup}) => {
   const [image, setImage] = useState('');
   const [passwordMask, setPasswordMask] = useState(true);
   const [passwordMask2, setPasswordMask2] = useState(true);
+  const [animation, setAnimiation] = useState(false);
 
   const formData = {
     first_name: firstName,
@@ -45,7 +50,23 @@ const SignupScreen = ({navigation, fetchSignup}) => {
     confirmPassword,
     phone,
     image,
-  }
+  };
+
+  const goToWelcome = () => {
+    setAnimiation(false);
+    navigation.navigate('Welcome');
+  };
+
+  const onSignup = () => {
+    fetchSignup(formData);
+    setAnimiation(true);
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPhone('');
+    setImage('');
+    setTimeout(goToWelcome, 5000);
+  };
 
   return (
     <>
@@ -91,8 +112,16 @@ const SignupScreen = ({navigation, fetchSignup}) => {
               <Button
                 text="CREATE ACCOUNT"
                 type={PRIMARY_BUTTON}
-                onPress={() => fetchSignup(formData)}
-                isBottom
+                onPress={() => onSignup()}
+                disabled={
+                  firstName &&
+                  lastName &&
+                  password &&
+                  confirmPassword &&
+                  phone &&
+                  email &&
+                  image
+                }
               />
             </View>
             <TouchableOpacity
@@ -105,6 +134,14 @@ const SignupScreen = ({navigation, fetchSignup}) => {
             <View style={styles.scrollBottom} />
           </View>
         </ScrollView>
+        <LoaderAnimation
+          animationType="fade"
+          animationImage={loading}
+          height={250}
+          width={250}
+          modalVisible={animation}
+          message="Send information"
+        />
       </KeyboardAvoidingView>
     </>
   );
@@ -142,6 +179,10 @@ const styles = StyleSheet.create({
   button: {
     marginVertical: 20,
   },
+  loading: {
+    width: 250,
+    height: 250,
+  },
   goToLogin: {
     paddingBottom: 10,
   },
@@ -155,6 +196,11 @@ const styles = StyleSheet.create({
   center: {
     alignSelf: 'center',
     paddingBottom: 10,
+  },
+  emptyStateContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   scrollBottom: {
     height: 50,

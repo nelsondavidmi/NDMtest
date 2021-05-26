@@ -10,12 +10,12 @@ import SplashScreen from 'react-native-splash-screen';
 // @Screens
 import LoadingScreen from './src/screens/LoadingScreen';
 import HomeScreen from './src/screens/HomeScreen';
-import LoginScreen from './src/screens/LoginScreen';
+import LoginScreen from './src/containers/login';
 import SignupScreen from './src/containers/signup';
 
 // @TabScreens
-import WelcomeScreen from './src/screens/WelcomeScreen';
-import AccountScreen from './src/screens/AccountScreen';
+import WelcomeScreen from './src/containers/welcome';
+import AccountScreen from './src/containers/account';
 import HelpScreen from './src/screens/HelpScreen';
 
 // @store

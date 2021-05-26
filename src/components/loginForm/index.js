@@ -21,7 +21,7 @@ const LoginForm = ({
       placeholder="Email"
       property="email"
       maxLength={60}
-      onEndEditing={() => setEmail(email.trim(), 'email')}
+      onEndEditing={() => setEmail(email.toLowerCase().trim(), 'email')}
     />
     <Input
       type="password"

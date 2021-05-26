@@ -1,24 +1,9 @@
 import AsyncStorage from '@react-native-community/async-storage';
-
-import {HOST, END_POINTS} from '../constants/constants';
 import {
-  AUTH_REQUEST,
-  AUTH_REQUEST_SUCCESSFUL,
-  AUTH_REQUEST_FAILURE,
-  GET_USER_REQUEST,
-  GET_USER_REQUEST_FAILURE,
-  GET_USER_REQUEST_SUCCESSFUL,
-  SET_TOKEN,
-  LOGIN_REQUEST,
-  LOGIN_REQUEST_SUCCESFUL,
-  LOGIN_REQUEST_FAILURE,
   SIGNUP_REQUEST,
   SIGNUP_REQUEST_SUCCESFUL,
   SIGNUP_REQUEST_FAILURE,
 } from '../constants/actionTypes';
-
-//@utils
-import {showMessage} from '../utils/general';
 
 const mapDataSignup = user => ({
   first_name: user.first_name,
@@ -47,6 +32,8 @@ export const fetchSignup = (user, navigation) => dispatch => {
     .then(res => res.json())
     .then(res => {
       dispatch(signupSuccessful(res));
+      AsyncStorage.setItem('id', JSON.stringify(res.id));
+      console.log(res);
     })
     .catch(err => {
       dispatch(signupError(err));

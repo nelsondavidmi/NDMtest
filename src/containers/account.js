@@ -6,7 +6,7 @@ import AccountScreen from '../screens/AccountScreen';
 
 const mapStateToProps = ({userReducer}) => {
   return {
-    user: userReducer.user,
+    user: userReducer.user.data,
   };
 };
 

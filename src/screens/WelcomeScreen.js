@@ -26,7 +26,7 @@ const data = [
   {id: 4, image: image4},
 ];
 
-const WelcomeScreen = ({navigation}) => {
+const WelcomeScreen = ({navigation, user}) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerBlue}>
@@ -37,9 +37,10 @@ const WelcomeScreen = ({navigation}) => {
             <Icon name="exit-outline" color="#FFFFFF" size={25} />
             <Text style={styles.logOutText}>LOG OUT</Text>
           </TouchableOpacity>
-          <Text style={styles.textName}>Welcome Maria!</Text>
+          <Text style={styles.textName}>Welcome {user && user.first_name}</Text>
         </View>
         <Carrousel data={data} />
+        {console.log(user)}
       </View>
       <Image source={explain} style={styles.image} />
       <Text style={styles.featuresText}>New features comming soon!</Text>

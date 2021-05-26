@@ -1,12 +1,6 @@
 // @vendors
 import React from 'react';
-import {
-  ActivityIndicator,
-  View,
-  TouchableOpacity,
-  Image,
-  Text,
-} from 'react-native';
+import {ActivityIndicator, View, TouchableOpacity, Image} from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 
 // assets

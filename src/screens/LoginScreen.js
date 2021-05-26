@@ -25,20 +25,40 @@ import {PRIMARY_BUTTON} from '../constants/constants';
 import LoginForm from '../components/loginForm';
 import TopBar from '../components/topbar';
 import Button from '../components/button';
+import LoaderAnimation from '../components/loaderAnimation';
 
-const LoginScreen = ({navigation}) => {
+// @assets
+const loading = require('../assets/animations/loading.json');
+
+const LoginScreen = ({navigation, fetchSignup}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordMask, setPasswordMask] = useState(true);
+  const [animation, setAnimation] = useState(false);
+  const [alert, setAlert] = useState(false);
+
+  const arrayInfo = require('../../db.json');
+
+  let emailSearch = arrayInfo.user.filter(item => item.email === `${email}`);
+
+  const goTo = () => {
+    setAnimation(false);
+    navigation.navigate('Welcome');
+  };
+
+  const goToWelcome = () => {
+    setAlert(false);
+    setAnimation(true);
+    fetchSignup(emailSearch[0]);
+    setTimeout(goTo, 6000);
+  };
 
   const onLogin = () => {
-    const initialData = {
-      email,
-      password,
-    };
+    emailSearch && emailSearch[0] && emailSearch[0].password === `${password}`
+      ? goToWelcome()
+      : setAlert(true);
     setEmail('');
     setPassword('');
-    navigation.navigate('Welcome');
   };
 
   return (
@@ -69,12 +89,17 @@ const LoginScreen = ({navigation}) => {
                 text="LOG IN"
                 type={PRIMARY_BUTTON}
                 onPress={() => onLogin()}
-                isBottom
+                disabled={!(email && password)}
               />
             </View>
+            {alert && (
+              <Text style={styles.wrongText}>
+                incorrect account or password.
+              </Text>
+            )}
             <TouchableOpacity
               style={styles.goToLogin}
-              onPress={() => navigation.navigate('Singup')}>
+              onPress={() => navigation.navigate('Signup')}>
               <Text style={styles.textCheck}>
                 Do you want to create and account?
               </Text>
@@ -82,6 +107,14 @@ const LoginScreen = ({navigation}) => {
             <View style={styles.scrollBottom} />
           </View>
         </ScrollView>
+        <LoaderAnimation
+          animationType="fade"
+          animationImage={loading}
+          height={250}
+          width={250}
+          modalVisible={animation}
+          message="Loading"
+        />
       </KeyboardAvoidingView>
     </>
   );
@@ -179,6 +212,12 @@ const styles = StyleSheet.create({
   topSafeArea: {
     flex: 0,
     backgroundColor: Platform.OS === 'ios' ? '#CFCECE' : 'transparent',
+  },
+  wrongText: {
+    color: 'red',
+    fontFamily: PRIMARY_FONT,
+    fontSize: 14,
+    textAlign: 'center',
   },
 });
 

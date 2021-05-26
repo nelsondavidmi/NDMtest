@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -13,27 +13,47 @@ import Icon from 'react-native-vector-icons/Entypo';
 //@components
 import Input from '../components/input';
 import Button from '../components/button';
+import LoaderAnimation from '../components/loaderAnimation';
 
 // @theme
 import {PRIMARY_COLOR, PRIMARY_FONT_MEDIUM} from '../theme/general';
 import {PRIMARY_BUTTON} from '../constants/constants';
 
-//@assets
-const profile = require('../assets/profile.png');
+// //@assets
+// const profile = require('../assets/profile.png');
+const loading = require('../assets/animations/loading.json');
 
-const AccountScreen = () => {
-  const [name, setName] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
+const AccountScreen = ({user, fetchSignup}) => {
+  const [firstName, setFirstName] = useState(user.first_name);
+  const [lastName, setLastName] = useState(user.last_name);
+  const [phone, setPhone] = useState(user.phone);
+  const [email, setEmail] = useState(user.email);
+  const [image, setImage] = useState(user.image);
+  const [animation, setAnimation] = useState(false);
+
+  const formData = {
+    first_name: firstName,
+    last_name: lastName,
+    email,
+    phone,
+    image,
+  };
+
+  const onChange = () => {
+    fetchSignup(formData);
+    setAnimation(true);
+    setTimeout(setAnimation(false), 8000);
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.containerBlue}>
-        <Text style={styles.name}>Maria Fernanda Rubio Santander</Text>
-        <Image source={profile} style={styles.imageProfile} />
+        <Text style={styles.name}>
+          {user.first_name} {user.last_name}
+        </Text>
+        <Image source={user.image} style={styles.imageProfile} />
         <TouchableOpacity
           style={styles.changeButton}
-          hitSlop={{top: 100, bottom: 100, right: 100, left: 100}}
+          hitSlop={{top: 250, bottom: 100, right: 100, left: 100}}
           onPress={() => Alert.alert('Comming Soon')}>
           <Icon name="pencil" color="#000" size={25} />
         </TouchableOpacity>
@@ -42,14 +62,14 @@ const AccountScreen = () => {
       <View style={styles.card}>
         <Input
           placeholder="First Name"
-          value={name}
-          onChangeText={value => setName(value)}
+          value={firstName}
+          onChangeText={value => setFirstName(value)}
           editable={false}
         />
         <Input
           placeholder="Last name"
-          value={firstName}
-          onChangeText={value => setFirstName(value)}
+          value={lastName}
+          onChangeText={value => setLastName(value)}
           editable={false}
         />
         <Input
@@ -68,8 +88,17 @@ const AccountScreen = () => {
       </View>
       <Button
         text="SAVE CHANGES"
+        onPress={() => onChange()}
         type={PRIMARY_BUTTON}
         customStyleContainer={styles.button}
+      />
+      <LoaderAnimation
+        animationType="fade"
+        animationImage={loading}
+        height={250}
+        width={250}
+        modalVisible={animation}
+        message="Change the information"
       />
     </ScrollView>
   );
@@ -86,9 +115,10 @@ const styles = StyleSheet.create({
     height: 150,
   },
   imageProfile: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: 150,
     height: 150,
+    borderRadius: 100,
     top: 15,
     alignSelf: 'center',
   },
