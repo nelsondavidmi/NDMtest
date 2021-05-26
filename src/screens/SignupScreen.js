@@ -40,7 +40,7 @@ const SignupScreen = ({navigation, fetchSignup}) => {
   const [image, setImage] = useState('');
   const [passwordMask, setPasswordMask] = useState(true);
   const [passwordMask2, setPasswordMask2] = useState(true);
-  const [animation, setAnimiation] = useState(false);
+  const [animation, setAnimation] = useState(false);
 
   const formData = {
     first_name: firstName,
@@ -53,13 +53,13 @@ const SignupScreen = ({navigation, fetchSignup}) => {
   };
 
   const goToWelcome = () => {
-    setAnimiation(false);
+    setAnimation(false);
     navigation.navigate('Welcome');
   };
 
   const onSignup = () => {
     fetchSignup(formData);
-    setAnimiation(true);
+    setAnimation(true);
     setFirstName('');
     setLastName('');
     setEmail('');
@@ -114,13 +114,15 @@ const SignupScreen = ({navigation, fetchSignup}) => {
                 type={PRIMARY_BUTTON}
                 onPress={() => onSignup()}
                 disabled={
-                  firstName &&
-                  lastName &&
-                  password &&
-                  confirmPassword &&
-                  phone &&
-                  email &&
-                  image
+                  !(
+                    firstName &&
+                    lastName &&
+                    password &&
+                    confirmPassword &&
+                    phone &&
+                    email &&
+                    image
+                  )
                 }
               />
             </View>

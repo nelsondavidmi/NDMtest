@@ -16,7 +16,7 @@ const mapDataSignup = user => ({
 });
 
 export const fetchSignup = (user, navigation) => dispatch => {
-  const url = 'http://localhost:3001/user';
+  const url = 'http://localhost:3000/user';
   const data = mapDataSignup(user);
   const body = JSON.stringify(data);
 

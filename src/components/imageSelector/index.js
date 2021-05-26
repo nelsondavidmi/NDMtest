@@ -2,9 +2,9 @@
 import React from 'react';
 import {ActivityIndicator, View, TouchableOpacity, Image} from 'react-native';
 import SvgUri from 'react-native-svg-uri';
+import Icon from 'react-native-vector-icons/Feather';
 
 // assets
-const closeIcon = require('../../assets/close.png');
 const imageEmpty = require('../../assets/svg/imageEmpty');
 
 // @styles
@@ -25,7 +25,7 @@ const ImageSelector = ({
         <TouchableOpacity
           style={styles.closeContainer}
           onPress={() => onCancelImage()}>
-          <Image source={closeIcon} style={styles.closeIcon} />
+          <Icon name="edit-2" color="#000" size={25} />
         </TouchableOpacity>
         <Image source={{uri: imageURI || image.uri}} style={styles.image} />
       </>

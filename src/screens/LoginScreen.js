@@ -7,8 +7,10 @@ import {
   StatusBar,
   SafeAreaView,
   Platform,
+  Image,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Keyboard,
 } from 'react-native';
 
 // theme
@@ -29,9 +31,10 @@ import LoaderAnimation from '../components/loaderAnimation';
 
 // @assets
 const loading = require('../assets/animations/loading.json');
+const profile = require('../assets/profile_empty.png');
 
 const LoginScreen = ({navigation, fetchSignup}) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState('');
   const [passwordMask, setPasswordMask] = useState(true);
   const [animation, setAnimation] = useState(false);
@@ -57,8 +60,9 @@ const LoginScreen = ({navigation, fetchSignup}) => {
     emailSearch && emailSearch[0] && emailSearch[0].password === `${password}`
       ? goToWelcome()
       : setAlert(true);
-    setEmail('');
+    setEmail(null);
     setPassword('');
+    Keyboard.dismiss();
   };
 
   return (
@@ -73,6 +77,10 @@ const LoginScreen = ({navigation, fetchSignup}) => {
         <ScrollView keyboardShouldPersistTaps="handled">
           <View style={styles.mainContainer}>
             <View style={styles.sectionForm}>
+              <Image
+                source={emailSearch[0] ? emailSearch[0].image : profile}
+                style={styles.imageProfile}
+              />
               <LoginForm
                 {...{
                   email,
@@ -183,6 +191,14 @@ const styles = StyleSheet.create({
     fontFamily: PRIMARY_FONT,
     fontSize: 13,
     marginRight: 4,
+  },
+  imageProfile: {
+    resizeMode: 'cover',
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+    top: 15,
+    alignSelf: 'center',
   },
   textTermsColor: {
     fontFamily: PRIMARY_FONT,

@@ -18,8 +18,7 @@ const LoadingScreen = ({navigation}) => {
   const [id, setId] = useState('');
   const getId = async () => {
     const idValue = await AsyncStorage.getItem('id');
-    setId(idValue);
-    console.log(id, 'este es');
+    await setId(idValue);
   };
   const getSession = () => {
     id ? navigation.navigate('Welcome') : navigation.navigate('Home');
