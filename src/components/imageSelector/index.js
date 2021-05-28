@@ -24,17 +24,20 @@ const ImageSelector = ({
       <>
         <TouchableOpacity
           style={styles.closeContainer}
-          onPress={() => onCancelImage()}>
+          onPress={() => onCancelImage()}
+          testID="onCancelImage">
           <Icon name="edit-2" color="#000" size={25} />
         </TouchableOpacity>
         <Image source={{uri: imageURI || image.uri}} style={styles.image} />
       </>
     )}
     {imageIsFetching && <ActivityIndicator color="tomato" />}
+    {console.log(imageIsFetching, image, imageURI)}
     {!imageIsFetching && !image && !imageURI && (
       <TouchableOpacity
         style={styles.containerImage}
-        onPress={() => onChooseImage()}>
+        onPress={() => onChooseImage()}
+        testID="onChooseImage">
         <SvgUri
           svgXmlData={imageEmpty}
           height={60}

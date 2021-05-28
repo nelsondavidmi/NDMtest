@@ -39,7 +39,10 @@ const Button = ({
   };
 
   return isPrimaryButton ? (
-    <TouchableOpacity disabled={disabled || fetching} onPress={() => onPress()}>
+    <TouchableOpacity
+      disabled={disabled || fetching}
+      onPress={() => onPress()}
+      testID="primaryButton">
       <LinearGradient
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
