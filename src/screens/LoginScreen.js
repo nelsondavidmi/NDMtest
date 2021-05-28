@@ -31,7 +31,7 @@ import LoaderAnimation from '../components/loaderAnimation';
 
 // @assets
 const loading = require('../assets/animations/loading.json');
-const profile = require('../assets/profile_empty.png');
+const profile = require('../assets/profile_empty.jpeg');
 
 const LoginScreen = ({navigation, fetchSignup}) => {
   const [email, setEmail] = useState(null);

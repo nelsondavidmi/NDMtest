@@ -32,7 +32,6 @@ const ImageSelector = ({
       </>
     )}
     {imageIsFetching && <ActivityIndicator color="tomato" />}
-    {console.log(imageIsFetching, image, imageURI)}
     {!imageIsFetching && !image && !imageURI && (
       <TouchableOpacity
         style={styles.containerImage}

@@ -33,7 +33,6 @@ export const fetchSignup = (user, navigation) => dispatch => {
     .then(res => {
       dispatch(signupSuccessful(res));
       AsyncStorage.setItem('id', JSON.stringify(res.id));
-      console.log(res);
     })
     .catch(err => {
       dispatch(signupError(err));
