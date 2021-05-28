@@ -228,10 +228,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginRight: 4,
   },
-  textInstachef: {
-    fontFamily: PRIMARY_FONT,
-    color: PRIMARY_COLOR,
-  },
   textCheck: {
     fontFamily: PRIMARY_FONT,
     textAlign: 'center',

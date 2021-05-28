@@ -40,7 +40,6 @@ const WelcomeScreen = ({navigation, user}) => {
           <Text style={styles.textName}>Welcome {user && user.first_name}</Text>
         </View>
         <Carrousel data={data} />
-        {console.log(user)}
       </View>
       <Image source={explain} style={styles.image} />
       <Text style={styles.featuresText}>New features comming soon!</Text>
